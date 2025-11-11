@@ -1,0 +1,20 @@
+# Construir imágenes y levantar todos los servicios en segundo plano
+docker-compose up -d --build
+
+# Ver logs (todos los servicios)
+docker-compose logs -f
+
+# Ver estado de servicios
+docker-compose ps
+
+# Parar y borrar contenedores (preserva volúmenes)
+docker-compose down
+
+# Parar y borrar contenedores y volúmenes (útil si quieres reiniciar la DB)
+docker-compose down -v
+
+# Ejecutar un shell dentro del servicio api
+docker-compose exec api sh
+
+# Reconstruir solo la api
+docker-compose build api
