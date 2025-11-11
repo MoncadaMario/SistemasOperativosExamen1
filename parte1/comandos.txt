@@ -1,0 +1,72 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20251110201049
+Username: DESKTOP-BHK1VBM\memon
+RunAs User: DESKTOP-BHK1VBM\memon
+Configuration Name: 
+Machine: DESKTOP-BHK1VBM (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe
+Process ID: 32124
+PSVersion: 5.1.26100.6899
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.6899
+BuildVersion: 10.0.26100.6899
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is .\parte1\comandos.txt
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker pull nginx:alpine
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker run -d --name web-examen -p 8080:80 nginx:alpine
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker ps
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker logs web-examen
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker inspect web-examen
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker stop web-examen
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker rm web-examen
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker volume create datos-examen
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker volume ls
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker run -d --name db-examen `
+  -e POSTGRES_PASSWORD=examen123 `
+  -e POSTGRES_DB=testdb `
+  -v datos-examen:/var/lib/postgresql/data `
+  -p 5432:5432 `
+  postgres:15-alpine
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker ps
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker logs db-examen
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker exec -i db-examen psql -U postgres -d testdb -c "CREATE TABLE IF NOT EXISTS examen (id serial PRIMARY KEY, texto text);"
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker exec -i db-examen psql -U postgres -d testdb -c "INSERT INTO examen (texto) VALUES ('dato_prueba');"
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker exec -i db-examen psql -U postgres -d testdb -c "SELECT * FROM examen;"
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker stop db-examen
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker rm db-examen
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker run -d --name db-examen `
+  -e POSTGRES_PASSWORD=examen123 `
+  -e POSTGRES_DB=testdb `
+  -v datos-examen:/var/lib/postgresql/data `
+  -p 5432:5432 `
+  postgres:15-alpine
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> docker exec -i db-examen psql -U postgres -d testdb -c "SELECT * FROM examen;"
+
+PS C:\Users\memon\Desktop\Ceutec\2025\Q4\Sistenas operativos 1\Examen1\SistemasOperativosExamen1> Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20251110202914
+**********************
