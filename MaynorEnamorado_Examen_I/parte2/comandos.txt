@@ -1,0 +1,18 @@
+# Comando para construir la imagen
+docker build -t mi-app-python:examen .
+
+# Comando para ejecutar el contenedor
+docker run -d -p 5000:5000 --name app-examen mi-app-python:examen
+
+# Comandos curl para probar los endpoints
+curl http://localhost:5000/
+curl http://localhost:5000/salud
+
+# Comando para ver los logs del contenedor
+docker logs app-examen
+
+# Comando para detener el contenedor
+docker stop app-examen
+
+# Comando para eliminar el contenedor
+docker rm app-examen
